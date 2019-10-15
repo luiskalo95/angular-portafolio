@@ -7,7 +7,9 @@ import { ServicioService } from '../../services/servicio.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private servicio: ServicioService) { }
+  constructor(private servicio: ServicioService) { 
+    
+  }
 
   ngOnInit() {
   }

@@ -8,9 +8,15 @@ import { ServicioService } from '../../services/servicio.service';
 })
 export class PortafolioComponent implements OnInit {
 
-  constructor(public servicio: ServicioService) { }
+  cargado = false;
+
+  constructor(public servicio: ServicioService) { 
+
+    setTimeout(()=> this.cargado = true, 1000);
+  }
 
   ngOnInit() {
+
   }
 
 }
