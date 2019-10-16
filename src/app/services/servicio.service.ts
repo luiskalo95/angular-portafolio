@@ -12,12 +12,18 @@ export class ServicioService {
   cargada = false;
   info: InfoPagina = {};
   equipo: Equipo;
-  productoIdx: ProductoIdx;
+  productosIdx: ProductoIdx[];
+  productosIdxFiltrados: ProductoIdx[];
 
   constructor(private http: HttpClient) {
+
     this.cargarInfoLocal();
     this.cargarInfoDatabase();
-    this.cargarProducto_idx();
+    this.cargarProductos_idx();
+    this.productosIdx = [];
+    this.productosIdxFiltrados = [];
+
+
   }
 
   private cargarInfoLocal() {
@@ -33,10 +39,34 @@ export class ServicioService {
     });
   }
 
-  private cargarProducto_idx() {
-    this.http.get('https://angular-portafolio-e43ed.firebaseio.com/productos_idx.json').subscribe((data: ProductoIdx) => { 
-      this.productoIdx = data;
-      console.log(data);
+  public cargarProductos_idx() {
+    return new Promise((resolve, reject) => {
+      this.http.get('https://angular-portafolio-e43ed.firebaseio.com/productos_idx.json')
+                .subscribe((data: ProductoIdx[]) => { this.productosIdx = data;
+                resolve(); 
+        });
+    })
+    }
+
+  public cargarProductoGeneral(codigo: string){
+    return this.http.get(`https://angular-portafolio-e43ed.firebaseio.com/productos/${codigo}.json`);
+  }
+
+  public cargarProductosFiltrado(palabra: string){
+
+    if (this.productosIdx.length === 0) {this.cargarProductos_idx()
+                                        .then(()=>{this.filtro(palabra);})
+                                        .catch((err) => console.log(err));}
+     else {this.filtro(palabra);}
+
+  }
+
+  public filtro(palabra: string) {
+    palabra = palabra.toLowerCase();
+    this.productosIdx.forEach(producto=>{
+      if(producto.categoria.toLowerCase().indexOf(palabra)>=0 || producto.titulo.toLowerCase().indexOf(palabra) >=0 ){
+           this.productosIdxFiltrados.push(producto);
+         }                        
     });
   }
 }

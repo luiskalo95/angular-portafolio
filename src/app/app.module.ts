@@ -9,6 +9,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ItemComponent } from './components/item/item.component';
 import { APP_ROUTING } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     PortafolioComponent,
     AboutComponent,
     ItemComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
