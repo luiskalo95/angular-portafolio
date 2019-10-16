@@ -9,7 +9,7 @@ import { ServicioService } from '../../services/servicio.service';
 export class AboutComponent implements OnInit {
 
 
-  constructor(private servicio: ServicioService) {
+  constructor(public servicio: ServicioService) {
     console.log(servicio.equipo);
 
    }

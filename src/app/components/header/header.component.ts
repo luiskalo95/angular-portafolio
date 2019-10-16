@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private servicio: ServicioService, private router: Router) { }
+  constructor(public servicio: ServicioService, private router: Router) { }
 
   buscarPalabra(palabra: string) {
     if (palabra.length <= 1) {return; }
